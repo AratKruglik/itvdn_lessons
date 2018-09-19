@@ -12,9 +12,9 @@ return array(
     */
 
     'filename'  => '_ide_helper',
-    'format'    => 'php',
+    'format'    => 'json',
     
-    'meta_filename' => '.phpstorm.meta.php',
+    'meta_filename' => '.phpstorm.meta.json',
 
     /*
     |--------------------------------------------------------------------------
