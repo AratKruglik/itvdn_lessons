@@ -14,7 +14,7 @@ return array(
     'filename'  => '_ide_helper',
     'format'    => 'json',
     
-    'meta_filename' => '.phpstorm.meta.json',
+    'meta_filename' => '.phpstorm.meta.php',
 
     /*
     |--------------------------------------------------------------------------
