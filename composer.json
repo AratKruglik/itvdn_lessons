@@ -10,7 +10,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
-        "melihovv/laravel-shopping-cart": "^5.7",
+        "moltin/laravel-cart": "^5.0",
         "predis/predis": "^1.1"
     },
     "require-dev": {

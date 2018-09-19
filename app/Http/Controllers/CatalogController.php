@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Catalog;
+use App\Product;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
@@ -14,7 +14,9 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::paginate(12);
+
+        return view('layouts.catalog.catalog', compact('products'));
     }
 
     /**
@@ -41,10 +43,10 @@ class CatalogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Catalog  $catalog
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Catalog $catalog)
+    public function show(Product $product)
     {
         //
     }
@@ -52,10 +54,10 @@ class CatalogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Catalog  $catalog
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Catalog $catalog)
+    public function edit(Product $product)
     {
         //
     }

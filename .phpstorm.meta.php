@@ -5,7 +5,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-09-19 11:35:57.
+    * Generated on 2018-09-19 14:27:45.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -139,7 +139,6 @@ namespace PHPSTORM_META {
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
-        'shopping-cart' => \Melihovv\ShoppingCart\ShoppingCart::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
@@ -279,7 +278,6 @@ namespace PHPSTORM_META {
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
-        'shopping-cart' => \Melihovv\ShoppingCart\ShoppingCart::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
@@ -419,7 +417,6 @@ namespace PHPSTORM_META {
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
-        'shopping-cart' => \Melihovv\ShoppingCart\ShoppingCart::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
@@ -559,7 +556,6 @@ namespace PHPSTORM_META {
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
-        'shopping-cart' => \Melihovv\ShoppingCart\ShoppingCart::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
@@ -699,7 +695,6 @@ namespace PHPSTORM_META {
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
-        'shopping-cart' => \Melihovv\ShoppingCart\ShoppingCart::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
@@ -839,7 +834,6 @@ namespace PHPSTORM_META {
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
-        'shopping-cart' => \Melihovv\ShoppingCart\ShoppingCart::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
@@ -979,7 +973,6 @@ namespace PHPSTORM_META {
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
-        'shopping-cart' => \Melihovv\ShoppingCart\ShoppingCart::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,

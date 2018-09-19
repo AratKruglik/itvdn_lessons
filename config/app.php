@@ -151,8 +151,7 @@ return [
          * Package Service Providers...
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Melihovv\ShoppingCart\ServiceProvider::class,
-
+        Moltin\Cart\CartServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -210,8 +209,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Cart' => Melihovv\ShoppingCart\Facades\ShoppingCart::class,
-
+        'Cart' => Moltin\Cart\Facade::class,
     ],
 
 ];

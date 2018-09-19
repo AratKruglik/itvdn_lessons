@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::resource('catalog', 'CatalogController');
+
+Route::group(['prefix' => 'cart'], function () {
+    Route::get('add/{productId}', 'CartController@add')->name('cart.add');
+});
