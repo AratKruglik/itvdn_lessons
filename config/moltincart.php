@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 	'storage' => 'session', //session, cache, file
 
     // Cache
@@ -19,4 +19,4 @@ return array(
 
     //Request Cookie
     'requestid' => 'CartID', //http input request identifier, example: your customer/backoffice could reload the cart in your shop controller, /public/shop?CartID=871f0bc18ca76e68bf7c3adf8f9426ef
-);
+];

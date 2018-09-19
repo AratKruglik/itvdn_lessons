@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price');
             $table->string('barcode');
             $table->integer('stock');
+            $table->string('cover')->default('https://via.placeholder.com/640x480 ');
             $table->timestamps();
             $table->softDeletes();
         });
