@@ -17,6 +17,8 @@ class ProductSeeder extends Seeder
         $faker = Faker\Factory::create();
         \App\Product::all()->each(function ($product) use ($faker) {
             $category = \App\Category::find($faker->numberBetween(1, 5));
+            $product->slug = str_slug($product->title, '-');
+            $product->save();
             $product->categories()->attach($category);
         });
     }
