@@ -8,7 +8,7 @@
                 </a>
 
             </h5>
-            <p>&dollar; {{ $product->price }}</p>
+            <p>&dollar;{{ $product->price }}</p>
             <p class="card-text">
                 {{ str_limit($product->description, 150, '...') }}
             </p>

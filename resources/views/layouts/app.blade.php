@@ -9,9 +9,6 @@
 
     <title>@yield('title') | {{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -19,42 +16,48 @@
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
     <!-- Styles -->
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+
+                <!-- Brand -->
+                <a class="navbar-brand waves-effect" href="/">
+                    <strong class="blue-text">Laravel-Store</strong>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+
+                <!-- Collapse -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                <!-- Links -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                    <!-- Left -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="navbar-list">
-                            <a href="{{ route('catalog.index') }}">Catalog</a>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="{{ route('catalog.index') }}">Catalog</a>
                         </li>
                     </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Cart: {{ Cart::totalItems() }} items, Total: &dollar; {{ Cart::total() }} <span class="caret"></span>
+                    <!-- Right -->
+                    <ul class="navbar-nav nav-flex-icons">
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="{{ route('cart.index') }}">
+                                <span class="badge red z-depth-1 mr-1"> {{ Cart::totalItems(true) }} </span>
+                                <i class="fa fa-shopping-cart"></i>
+                                <span class="clearfix d-none d-sm-inline-block"> Cart </span>
                             </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('cart.index') }}">
-                                    Checkout
-                                </a>
-                                <a class="dropdown-item" href="{{ route('cart.destroy') }}">
-                                    Clear cart
-                                </a>
-                            </div>
                         </li>
                         <!-- Authentication Links -->
                         @guest
@@ -68,18 +71,20 @@
                             </li>
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
                                         @csrf
                                     </form>
                                 </div>
@@ -89,10 +94,33 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
+        <!-- Navbar -->
+        <main class="py-4 mt-5">
             @yield('content')
         </main>
+        <!--Footer-->
+        <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+            <!--Copyright-->
+            <div class="footer-copyright py-3">
+                © 2018 Copyright:
+                <a href="/"> Laravel-Store.local </a>
+            </div>
+            <!--/.Copyright-->
+        </footer>
+        <!--/.Footer-->
     </div>
+
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="j{{ asset('js/popper.min.js') }}"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">
+        // Animations initialization
+        new WOW().init();
+    </script>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    @yield('scripts')
 </body>
 </html>

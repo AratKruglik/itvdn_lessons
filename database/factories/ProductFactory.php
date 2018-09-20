@@ -10,6 +10,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'price' => $faker->randomFloat(2, 10, 999),
         'barcode' => $faker->ean8,
         'stock' => $faker->numberBetween(0, 999),
-        'cover' => $faker->imageUrl(640, 480, 'cats', true, 'Faker')
+        'cover' => 'https://loremflickr.com/640/480/computer'
     ];
 });

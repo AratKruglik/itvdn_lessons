@@ -21,6 +21,7 @@ Route::resource('catalog', 'CatalogController');
 
 Route::group(['prefix' => 'cart'], function () {
     Route::get('/', 'CartController@index')->name('cart.index');
+    Route::get('checkout', 'CartController@checkout')->name('cart.checkout');
     Route::get('add/{productId}', 'CartController@add')->name('cart.add');
     Route::get('destroy', 'CartController@destroy')->name('cart.destroy');
 });

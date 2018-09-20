@@ -11,7 +11,12 @@ class CartController extends Controller
 
     public function index()
     {
-        dump(Cart::contents(true));
+        return view('layouts.cart.cart');
+    }
+
+    public function checkout()
+    {
+        return view('layouts.cart.checkout');
     }
 
 
