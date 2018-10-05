@@ -47,7 +47,7 @@
                     <!-- Left -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link waves-effect" href="{{ route('catalog.index') }}">Catalog</a>
+                            <a class="nav-link waves-effect" href="{{ route('product.index') }}">Catalog</a>
                         </li>
                     </ul>
                     <!-- Right -->

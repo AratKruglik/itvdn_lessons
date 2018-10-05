@@ -3,7 +3,7 @@
         <img class="card-img-top" src="{{ $product->cover }}" alt="{{ $product->title }}">
         <div class="card-body">
             <h5 class="card-title">
-                <a href="{{ route('catalog.show', $product) }}">
+                <a href="{{ url('product/' . $product->slug) }}">
                     {{ $product->title }}
                 </a>
 

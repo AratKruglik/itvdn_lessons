@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
 use Cart;
@@ -20,7 +21,7 @@ class CartController extends Controller
     }
 
 
-    public function add($productId)
+    public function add($productId, $quantity = 1)
     {
         $product = Product::findOrFail($productId);
 
@@ -28,16 +29,49 @@ class CartController extends Controller
             'id' => $product->id,
             'name' => $product->title,
             'price' => $product->price,
-            'quantity' => 1
+            'quantity' => $quantity
         ]);
 
         return redirect()->back();
+    }
+
+    public function update(Request $request)
+    {
+        $this->validate($request, [
+            'productId' => 'required',
+            'qty' => 'required|min:1'
+        ]);
+
+
+        if (Cart::has($request->productId) && $cartItem = Cart::item($request->productId)) {
+            $cartItem->quantity = $request->qty;
+        }
+
+        return redirect()->route('cart.index');
+    }
+
+    public function drop($productId)
+    {
+        if (Cart::has($productId) && $cartItem = Cart::item($productId)) {
+            $cartItem->remove();
+        }
+
+        return redirect()->route('cart.index');
     }
 
     public function destroy()
     {
         Cart::destroy();
 
-        return redirect()->back();
+        return redirect('product');
+    }
+
+    public function order(Request $request)
+    {
+        $this->validate($request, []);
+
+        $order = Order::create($request->all());
+
+        auth()->user()->orders()->save($order);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 
-class CatalogController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,12 +43,14 @@ class CatalogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($slug)
     {
-        //
+        $product = Product::where('slug', $slug)->firstOrFail();
+
+        return view('layouts.catalog.product', compact('product'));
     }
 
     /**
@@ -66,10 +68,10 @@ class CatalogController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Catalog  $catalog
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Catalog $catalog)
+    public function update(Request $request, Product $product)
     {
         //
     }
@@ -77,10 +79,10 @@ class CatalogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Catalog  $catalog
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Catalog $catalog)
+    public function destroy(Product $product)
     {
         //
     }
