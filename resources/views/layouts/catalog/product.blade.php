@@ -23,7 +23,7 @@
 
                     <div class="mb-3">
                         @foreach($product->categories as $category)
-                        <a href="">
+                            <a href="">
                             <span class="badge
                              @if ($category->id == 1)
                                 purple
@@ -36,8 +36,8 @@
                                 @elseif($category->id == 5)
                                 lime
                             @endif
-                             mr-1">{{ $category->name }}</span>
-                        </a>
+                                mr-1">{{ $category->name }}</span>
+                            </a>
                         @endforeach
                     </div>
 
@@ -53,15 +53,23 @@
                         {{ $product->description }}
                     </p>
 
-                    <form class="d-flex justify-content-left">
-                        <!-- Default input -->
-                        <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+                    @if(session()->has('success'))
+                        <blockquote class="blockquote bq-success">
+                            <p class="bq-title">Success!</p>
+                            <p>Added to cart successfully. <a href="{{ route('cart.index') }}">Get cart?</a></p>
+                        </blockquote>
+                    @endif
+
+                    <form class="d-flex justify-content-left" action="{{ route('cart.add') }}" method="post">
+                    {{ csrf_field() }}
+                    <!-- Default input -->
+                        <input type="number" name="quantity" value="1" aria-label="Search" class="form-control"
+                               style="width: 100px" min="1">
+                        <input type="hidden" name="productId" value="{{ $product->id }}">
                         <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
                             <i class="fa fa-shopping-cart ml-1"></i>
                         </button>
-
                     </form>
-
                 </div>
                 <!--Content-->
 

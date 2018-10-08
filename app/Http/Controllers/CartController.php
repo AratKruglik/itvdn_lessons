@@ -28,20 +28,30 @@ class CartController extends Controller
 
 
     /**
+     * @param Request $request
      * @param $productId
      * @param int $quantity
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function add($productId, $quantity = 1)
+    public function add(Request $request, $productId = null, $quantity = 1)
     {
+        $this->validate($request, [
+            'productId' => 'integer',
+            'quantity' => 'integer'
+        ]);
+
+        $productId = $request->has('productId') ? $request->productId : $productId;
+
         $product = Product::findOrFail($productId);
 
         Cart::insert([
             'id' => $product->id,
             'name' => $product->title,
             'price' => $product->price,
-            'quantity' => $quantity
+            'quantity' => $request->has('quantity') ? $request->quantity : $quantity
         ]);
+
+        session()->flash('success', true);
 
         return redirect()->back();
     }
