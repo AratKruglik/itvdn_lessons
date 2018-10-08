@@ -72,6 +72,13 @@ class CartController extends Controller
 
         $order = Order::create($request->all());
 
-        auth()->user()->orders()->save($order);
+        return redirect()->route('cart.order.success', ['orderId' => $order->id]);
+    }
+
+    public function success($orderId)
+    {
+        $order= Order::findOrFail($orderId);
+
+        return view('layouts.cart.success', compact('order'));
     }
 }

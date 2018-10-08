@@ -31,9 +31,13 @@
             <div class="container">
 
                 <!-- Brand -->
-                <a class="navbar-brand waves-effect" href="/">
-                    <strong class="blue-text">Laravel-Store</strong>
+                <a class="navbar-brand waves-effect" href="{{ route('index') }}">
+                    <img src="{{ asset('img/logo.png') }}" alt="" style="max-height: 35px">
                 </a>
+
+                <span class="navbar-brand waves-effect">
+                    Laravel-Shop
+                </span>
 
                 <!-- Collapse -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

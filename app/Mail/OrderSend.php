@@ -37,6 +37,8 @@ class OrderSend extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        $order = $this->order;
+
+        return $this->view('layouts.mails.orders.success', compact('order'));
     }
 }

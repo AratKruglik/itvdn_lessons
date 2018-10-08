@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
 
 Auth::routes(['verify' => true]);
 
@@ -28,4 +28,5 @@ Route::group(['prefix' => 'cart'], function () {
     Route::get('drop/{productId}', 'CartController@drop')->name('cart.drop');
     Route::get('destroy', 'CartController@destroy')->name('cart.destroy');
     Route::post('order', 'CartController@order')->name('cart.order');
+    Route::get('{orderId}/success', 'CartController@success')->name('cart.order.success');
 });

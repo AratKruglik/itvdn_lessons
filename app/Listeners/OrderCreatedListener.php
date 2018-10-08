@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
+use App\Mail\OrderSend;
 use App\OrderItem;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Events\OrderCreated;
 use Illuminate\Support\Facades\Mail;
-//use Moltin\Cart\Cart;
 
 class OrderCreatedListener implements ShouldQueue
 {
@@ -29,6 +29,10 @@ class OrderCreatedListener implements ShouldQueue
      */
     public function handle(OrderCreated $event)
     {
+        if (!auth()->guest()) {
+            auth()->user()->orders()->save($event->order);
+        }
+
         foreach (\Cart::contents() as $cartItem) {
             OrderItem::create([
                 'order_id' => $event->order->id,
@@ -40,8 +44,7 @@ class OrderCreatedListener implements ShouldQueue
         $event->order->update(['total' => \Cart::total()]);
         \Cart::destroy();
 
-//        Mail::to($event->order->user->email);
 
-        return redirect('product');
+        Mail::to($event->order->user->email)->send(new OrderSend($event->order));
     }
 }
