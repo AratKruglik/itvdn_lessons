@@ -11,6 +11,9 @@ class Product extends Model
 
     protected $fillable = ['title', 'slug', 'description', 'price', 'cover'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function categories()
     {
         return $this->belongsToMany(Category::class);

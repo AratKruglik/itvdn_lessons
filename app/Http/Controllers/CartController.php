@@ -10,17 +10,28 @@ use Cart;
 class CartController extends Controller
 {
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('layouts.cart.cart');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function checkout()
     {
         return view('layouts.cart.checkout');
     }
 
 
+    /**
+     * @param $productId
+     * @param int $quantity
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function add($productId, $quantity = 1)
     {
         $product = Product::findOrFail($productId);
@@ -35,6 +46,10 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request)
     {
         $this->validate($request, [
@@ -50,6 +65,10 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
+    /**
+     * @param $productId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function drop($productId)
     {
         if (Cart::has($productId) && $cartItem = Cart::item($productId)) {
@@ -59,6 +78,9 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function destroy()
     {
         Cart::destroy();
@@ -66,6 +88,10 @@ class CartController extends Controller
         return redirect('product');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function order(Request $request)
     {
         $this->validate($request, []);
@@ -75,6 +101,10 @@ class CartController extends Controller
         return redirect()->route('cart.order.success', ['orderId' => $order->id]);
     }
 
+    /**
+     * @param $orderId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function success($orderId)
     {
         $order= Order::findOrFail($orderId);

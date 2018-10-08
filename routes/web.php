@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
+    dd(auth()->user()->roles);
     return view('welcome');
 })->name('index');
 
