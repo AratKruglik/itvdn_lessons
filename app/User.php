@@ -55,4 +55,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    /**
+     * @param string $role
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function adminRole($role)
+    {
+        return $this->belongsToMany(Role::class)->where('slug', $role);
+    }
 }
