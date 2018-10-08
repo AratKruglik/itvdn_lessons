@@ -46,8 +46,8 @@
                 </tr>
                 </tfoot>
             </table>
-            <a href="{{ route('cart.destroy') }}" class="btn-danger btn btn-lg btn-link">Clear cart</a>
-            <a href="{{ route('cart.checkout') }}" class="btn-success btn btn-lg btn-link">
+            <a href="{{ route('cart.destroy') }}" class="btn-danger btn btn-lg">Clear cart</a>
+            <a href="{{ route('cart.checkout') }}" class="btn-success btn btn-lg">
                 Checkout <i class="fa fa-arrow-right"></i>
             </a>
         @else

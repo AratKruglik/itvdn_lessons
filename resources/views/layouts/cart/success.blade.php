@@ -10,8 +10,8 @@
             <p>Your order <strong>#{{ $order->id }}</strong> was successfully created. We will call you as soon as possible!</p>
         </blockquote>
 
-        <div class="row align-content-center">
-            <div class="col-1 offset-3 align-content-center">
+        <div class="row">
+            <div class="col">
                 <a href="{{ route('index') }}" class="btn btn-success">Get back</a>
             </div>
         </div>

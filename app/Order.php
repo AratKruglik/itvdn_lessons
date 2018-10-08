@@ -7,7 +7,8 @@ use App\Events\OrderCreated;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'comment', 'total'];
+    protected $fillable = ['user_id', 'comment', 'total', 'customerName', 'customerLastName', 'customerEmail',
+        'customerPhone', 'customerAddress'];
 
     /**
      * The event map for the model.

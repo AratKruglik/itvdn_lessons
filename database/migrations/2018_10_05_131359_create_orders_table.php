@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('customerLastName')->nullable();
             $table->string('customerEmail')->nullable();
             $table->string('customerPhone')->nullable();
+            $table->string('customerAddress')->nullable();
             $table->text('comment')->nullable();
             $table->float('total', 10, 2)->default(0.00);
             $table->timestamps();
