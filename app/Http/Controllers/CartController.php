@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 use Cart;
 
@@ -25,7 +26,6 @@ class CartController extends Controller
     {
         return view('layouts.cart.checkout');
     }
-
 
     /**
      * @param Request $request
@@ -67,7 +67,6 @@ class CartController extends Controller
             'qty' => 'required|min:1'
         ]);
 
-
         if (Cart::has($request->productId) && $cartItem = Cart::item($request->productId)) {
             $cartItem->quantity = $request->qty;
         }
@@ -104,7 +103,27 @@ class CartController extends Controller
      */
     public function order(Request $request)
     {
-        $this->validate($request, []);
+//        $this->validate($request, [
+//            'updateUser' => 'boolean'
+//        ]);
+
+        if ($request->has('updateUser')) {
+            if (!auth()->guest()) {
+                auth()->user()->update([
+                    'name' => $request->customerName,
+                    'lastname' => $request->customerLastName,
+                    'email' => $request->customerEmail,
+                    'phone' => $request->customerPhone
+                ]);
+            } else {
+                User::updateOrNew([
+                    'name' => $request->customerName,
+                    'lastname' => $request->customerLastName,
+                    'email' => $request->customerEmail,
+                    'phone' => $request->customerPhone
+                ]);
+            }
+        }
 
         $order = Order::create($request->all());
 

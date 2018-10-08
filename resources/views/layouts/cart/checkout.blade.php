@@ -77,7 +77,7 @@
                         <hr class="mb-4">
 
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="save-info">
+                            <input type="checkbox" class="custom-control-input" id="save-info" name="updateUser">
                             <label class="custom-control-label" for="save-info">Save this information for next
                                 time</label>
                         </div>

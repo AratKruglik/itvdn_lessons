@@ -60,7 +60,7 @@
                         </blockquote>
                     @endif
 
-                    <form class="d-flex justify-content-left" action="{{ route('cart.add') }}" method="post">
+                    <form class="d-flex justify-content-left" action="{{ route('cart.add', ['productId' => $product->id]) }}" method="post">
                     {{ csrf_field() }}
                     <!-- Default input -->
                         <input type="number" name="quantity" value="1" aria-label="Search" class="form-control"
