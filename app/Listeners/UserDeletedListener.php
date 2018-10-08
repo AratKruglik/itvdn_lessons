@@ -2,12 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\UserCreated;
-use App\Role;
+use App\Events\UserDeleted;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserCreatedListener
+class UserDeletedListener
 {
     /**
      * Create the event listener.
@@ -22,13 +21,11 @@ class UserCreatedListener
     /**
      * Handle the event.
      *
-     * @param  \App\Events\UserCreated  $event
+     * @param  UserDeleted  $event
      * @return void
      */
-    public function handle(UserCreated $event)
+    public function handle(UserDeleted $event)
     {
-        $userRole = Role::where('slug', 'user')->first();
-
-        $event->user->roles()->sync([$userRole->id]);
+        $event->user->roles()->sync([]);
     }
 }
