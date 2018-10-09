@@ -60,7 +60,8 @@
                         </blockquote>
                     @endif
 
-                    <form class="d-flex justify-content-left" action="{{ route('cart.add', ['productId' => $product->id]) }}" method="post">
+                    <form class="d-flex justify-content-left"
+                          action="{{ route('cart.add', ['productId' => $product->id]) }}" method="post">
                     {{ csrf_field() }}
                     <!-- Default input -->
                         <input type="number" name="quantity" value="1" aria-label="Search" class="form-control"
@@ -131,6 +132,78 @@
 
         </div>
         <!--Grid row-->
+
+        <hr>
+
+        {{--Comments- form --}}
+        @guest
+            <blockquote class="blockquote bq-warning">
+                <p class="bq-title">Sign in to comment</p>
+                <p>Please <a href="{{ route('login') }}">sign in</a> to comment this product.</p>
+            </blockquote>
+        @endguest
+        @auth
+        <div class="row wow fadeIn">
+            <div class="col-12">
+                <form action="{{ route('comments.add') }}" class="form-group" method="post">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="productId" value="{{ $product->id }}">
+                    <div class="row">
+                        <div class="col-12">
+                            <textarea name="comment" id="comment" cols="30" rows="5" class="form-control"
+                                      placeholder="Your comment here"></textarea>
+                        </div>
+                        <div class="col-12 mt-1">
+                            <button type="submit" class="btn btn-primary btn-block">Leave Comment</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        @endauth
+
+        {{--Comments--}}
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="panel panel-default widget">
+                        <div class="panel-heading mb-4">
+                            <span class="glyphicon glyphicon-comment"></span>
+                            <h3>Recent Comments <span class="badge red">{{ $product->comments->count() }}</span></h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                @foreach($product->comments as $comment)
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-2 col-md-1">
+                                                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" />
+                                            </div>
+                                            <div class="col-10 col-md-11">
+                                                <div class="col-12">
+                                                    <div class="mic-info">
+                                                        By: <a href="#">{{ $comment->user->name }} {{ $comment->user->lastname }}</a>
+                                                        on {{ \Carbon\Carbon::parse($comment->created_at)->format('d M Y, H:i') }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="comment-text">
+                                                        <p >
+                                                            {{ $comment->comment }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{--/Comments--}}
 
     </div>
 @stop

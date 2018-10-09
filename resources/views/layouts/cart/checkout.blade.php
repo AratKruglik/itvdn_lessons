@@ -50,7 +50,7 @@
                         <div class="form-group mb-5">
                             <label for="email" class="">Email</label>
                             <input type="text" id="email" class="form-control" placeholder="youremail@example.com"
-                                   name="customerEmail" value="{{ auth()->user()->email }}">
+                                   name="customerEmail" value="{{ auth()->user()->email }}" required>
                         </div>
 
                         <!--address-->
@@ -64,7 +64,7 @@
                             <label for="address" class="">Address</label>
                             <input type="text" id="address" class="form-control"
                                    placeholder="Park av., 123, New York, USA"
-                                   name="customerAddress">
+                                   name="customerAddress" value="{{ auth()->user()->address }}">
                         </div>
 
                         <div class="form-group mb-5">

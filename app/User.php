@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'lastname', 'phone'
+        'name', 'email', 'password', 'lastname', 'phone', 'address'
     ];
 
     /**
@@ -63,5 +63,13 @@ class User extends Authenticatable
     public function adminRole($role)
     {
         return $this->belongsToMany(Role::class)->where('slug', $role);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

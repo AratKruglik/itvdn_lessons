@@ -19,6 +19,7 @@ Auth::routes(['verify' => true]);
 
 Route::resource('catalog', 'CatalogController');
 Route::get('catalog/{slug}', 'CatalogController@show')->name('catalog.show');
+Route::post('comments/add', 'CommentController@add')->name('comments.add');
 
 Route::group(['prefix' => 'cart'], function () {
     Route::get('/', 'CartController@index')->name('cart.index');

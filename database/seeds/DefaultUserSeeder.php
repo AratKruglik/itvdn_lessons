@@ -13,7 +13,7 @@ class DefaultUserSeeder extends Seeder
     {
         \App\User::create([
             'name' => 'Admin',
-            'email' => 'admin@' . env('APP_DOMAIN'),
+            'email' => 'admin@' . config('app.domain'),
             'password' => bcrypt('123456'),
         ]);
     }

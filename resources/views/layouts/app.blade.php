@@ -109,7 +109,7 @@
         <!--Copyright-->
         <div class="footer-copyright py-3">
             © 2018 Copyright:
-            <a href="/"> Laravel-Store.local </a>
+            <a href="{{ route('index') }}"> {{ config('app.name') }} </a>
         </div>
         <!--/.Copyright-->
     </footer>

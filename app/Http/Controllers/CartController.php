@@ -103,26 +103,20 @@ class CartController extends Controller
      */
     public function order(Request $request)
     {
-//        $this->validate($request, [
-//            'updateUser' => 'boolean'
-//        ]);
+        $this->validate($request, [
+            'customerEmail' => 'required|email'
+        ]);
+
+        $user = auth()->guest() ? User::where('email', $request->customerEmail)->first() : auth()->user();
 
         if ($request->has('updateUser')) {
-            if (!auth()->guest()) {
-                auth()->user()->update([
-                    'name' => $request->customerName,
-                    'lastname' => $request->customerLastName,
-                    'email' => $request->customerEmail,
-                    'phone' => $request->customerPhone
-                ]);
-            } else {
-                User::updateOrNew([
-                    'name' => $request->customerName,
-                    'lastname' => $request->customerLastName,
-                    'email' => $request->customerEmail,
-                    'phone' => $request->customerPhone
-                ]);
-            }
+            $user->update([
+                'name' => $request->customerName,
+                'lastname' => $request->customerLastName,
+                'email' => $request->customerEmail,
+                'phone' => $request->customerPhone,
+                'address' => $request->customerAddress,
+            ]);
         }
 
         $order = Order::create($request->all());
