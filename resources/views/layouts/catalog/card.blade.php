@@ -28,18 +28,18 @@
             </p>
             <p>&dollar;{{ $product->price }}</p>
             <p class="card-text">
-                {{ str_limit($product->description, 150, '...') }}
+                {{ str_limit($product->description, 120, '...') }}
             </p>
 
         </div>
         <div class="card-footer">
-                <span class="badge badge-secondary {{ $product->stock > 0 ? 'badge-success' : 'badge-danger'}}">
-                    {{ $product->stock > 0 ? 'In Stock' : 'Not In Stock'}}
+                <span class="badge {{ $product->stock > 0 ? 'badge-success' : 'badge-danger'}}">
+                    {{ $product->stock > 0 ? 'on stock' : 'not on stock'}}
                 </span>
             <span class="float-right">
                 <a href="{{ $product->stock > 0 ? route('cart.add', ['productId' => $product->id]) : '#' }}"
-                   class="text-muted">
-                    <i class="fas fa-cart-arrow-down"></i>
+                   class="btn btn-sm btn-outline-secondary waves-effect">
+                    to cart <i class="fas fa-cart-arrow-down"></i>
                 </a>
             </span>
         </div>

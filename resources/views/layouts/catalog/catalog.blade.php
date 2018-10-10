@@ -3,6 +3,7 @@
 @section('title') Catalog @endsection
 
 @section('content')
+    <p>&nbsp;</p>
     <div class="container-fluid">
         <div class="row">
             @foreach($products as $product)

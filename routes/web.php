@@ -11,15 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('index');
+Route::get('/', 'PageController@getIndex')->name('index');
 
 Auth::routes(['verify' => true]);
 
 Route::resource('catalog', 'CatalogController');
 Route::get('catalog/{slug}', 'CatalogController@show')->name('catalog.show');
-Route::post('comments/add', 'CommentController@add')->name('comments.add');
+Route::post('comments/add', 'CommentController@add')->name('comments.add')->middleware('verified');
 
 Route::group(['prefix' => 'cart'], function () {
     Route::get('/', 'CartController@index')->name('cart.index');
