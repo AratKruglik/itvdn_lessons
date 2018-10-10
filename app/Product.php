@@ -26,4 +26,12 @@ class Product extends Model
     {
         return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function gallery()
+    {
+        return $this->hasOne(Gallery::class);
+    }
 }

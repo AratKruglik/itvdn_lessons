@@ -9,9 +9,19 @@
         <div class="row wow fadeIn">
             <!--Grid column-->
             <div class="col-md-6 mb-4">
-                <img src="{{ $product->cover }}" class="img-fluid"
-                     alt="">
-
+                <div class="row">
+                    <div class="col-12">
+                        <img src="{{ $product->cover }}" class="img-fluid img-thumbnail"
+                             alt="">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    @foreach($product->gallery->photos as $photo)
+                        <div class="col-3">
+                            <img src="{{ $photo }}" alt="" class="img-fluid img-thumbnail">
+                        </div>
+                    @endforeach
+                </div>
             </div>
             <!--Grid column-->
 
@@ -204,6 +214,5 @@
             </div>
         </div>
         {{--/Comments--}}
-
     </div>
 @stop
