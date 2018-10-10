@@ -1,4 +1,4 @@
-<div class="col-3 mb-4">
+<div class="col-3 mb-4 d-flex align-items-stretch">
     <div class="card">
         <img class="card-img-top" src="{{ $product->cover }}" alt="{{ $product->title }}">
         <div class="card-body">

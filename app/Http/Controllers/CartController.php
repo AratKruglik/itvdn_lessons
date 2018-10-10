@@ -94,7 +94,7 @@ class CartController extends Controller
     {
         Cart::destroy();
 
-        return redirect('product');
+        return redirect()->route('catalog.index');
     }
 
     /**
