@@ -13,8 +13,8 @@
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('layouts.app');
-})->name('index');
+Route::get('/', 'PageController@index')->name('index');
 
-Route::resource('catalog', 'CatalogController');
+Route::resource('catalog', 'CatalogController')->parameters([
+    'catalog' => 'slug'
+]);

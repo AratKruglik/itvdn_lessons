@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
@@ -13,7 +14,9 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::orderBy('created_at', 'desc')->simplePaginate();
+
+        return view('catalog.index', compact('products'));
     }
 
     /**
