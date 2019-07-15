@@ -15,6 +15,6 @@ class Product extends Model
 
     public function gallery()
     {
-        return$this->hasOne(Gallery::class);
+        return $this->hasOne(Gallery::class);
     }
 }
