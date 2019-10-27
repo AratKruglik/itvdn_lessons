@@ -36,12 +36,12 @@
                 <span class="badge {{ $product->stock > 0 ? 'badge-success' : 'badge-danger'}}">
                     {{ $product->stock > 0 ? 'on stock' : 'not on stock'}}
                 </span>
-{{--            <span class="float-right">--}}
-{{--                <a href="{{ $product->stock > 0 ? route('cart.add', ['productId' => $product->id]) : '#' }}"--}}
-{{--                   class="btn btn-sm btn-outline-secondary waves-effect">--}}
-{{--                    to cart <i class="fas fa-cart-arrow-down"></i>--}}
-{{--                </a>--}}
-{{--            </span>--}}
+            <span class="float-right">
+                <a href="{{ $product->stock > 0 ? route('cart.add', ['productId' => $product->id]) : '#' }}"
+                   class="btn btn-sm btn-outline-secondary waves-effect">
+                    to cart <i class="fas fa-cart-arrow-down"></i>
+                </a>
+            </span>
         </div>
     </div>
 </div>
