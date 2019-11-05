@@ -22,4 +22,8 @@ Route::resource('catalog', 'CatalogController')->parameters([
 Route::prefix('cart')->group(function () {
     Route::get('/', 'CartController@index')->name('cart.index');
     Route::get('add/{productId}', 'CartController@add')->name('cart.add');
+    Route::patch('update', 'CartController@update')->name('cart.update');
+    Route::get('drop', 'CartController@drop')->name('cart.drop');
+    Route::get('destroy', 'CartController@destroy')->name('cart.destroy');
+    Route::get('checkout', 'CartController@checkout')->name('cart.checkout');
 });
