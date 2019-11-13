@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CartDropItemRequest;
 use App\Http\Requests\CartUpdateRequest;
 use App\Product;
 use Illuminate\Http\Request;
@@ -26,6 +27,20 @@ class CartController extends Controller
     public function update(CartUpdateRequest $request)
     {
         Cart::update($request->productId, $request->qty);
+
+        return redirect()->route('cart.index');
+    }
+
+    public function drop(CartDropItemRequest $request)
+    {
+        Cart::remove($request->productId);
+
+        return redirect()->route('cart.index');
+    }
+
+    public function destroy()
+    {
+        Cart::destroy();
 
         return redirect()->route('cart.index');
     }
