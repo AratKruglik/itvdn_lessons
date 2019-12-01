@@ -28,4 +28,4 @@ Route::prefix('cart')->group(function () {
     Route::get('checkout', 'CartController@checkout')->name('cart.checkout');
 });
 
-Route::resource('order', 'OrderController');
+Route::resource('order', 'OrderController', ['only' => ['store', 'update', 'destroy', 'show']]);

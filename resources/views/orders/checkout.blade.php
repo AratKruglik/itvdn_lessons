@@ -71,7 +71,7 @@
                             <label for="comment" class="">Comment</label>
                             <textarea type="text" id="comment" class="form-control"
                                       placeholder="Comment"
-                                      name="customerAddress"></textarea>
+                                      name="customerComment"></textarea>
                         </div>
 
                         <hr class="mb-4">
