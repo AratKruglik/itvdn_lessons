@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
 use App\Order;
+use App\OrderItem;
 use App\User;
 use \Cart;
 use Illuminate\Http\Request;
@@ -42,11 +43,20 @@ class OrderController extends Controller
             'customerName' => $request->customerName,
             'customerLastName' => $request->customerLastName,
             'customerEmail' => $request->customerEmail,
-            'customerPhone' => $request->customerphone,
+            'customerPhone' => $request->customerPhone,
             'customerAddress' => $request->customerAddress,
             'comment' => $request->customerComment,
             'total' => Cart::total(),
         ]);
+
+        foreach (Cart::content() as $cartRow) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $cartRow->model->id,
+                'price' => $cartRow->model->price,
+                'quantity' => $cartRow->qty,
+            ]);
+        }
 
         if ($request->has('updateUser')) {
             $user = auth()->guest() ? User::where('email', $request->customerEmail)->first() : auth()->user();
@@ -66,7 +76,9 @@ class OrderController extends Controller
             }
         }
 
-        return redirect()->route('cart.order.success', ['orderId' => $order->id]);
+        Cart::destroy();
+
+        return redirect()->route('cart.success', ['orderId' => $order->id]);
     }
 
     /**

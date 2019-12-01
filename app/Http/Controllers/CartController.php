@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CartDropItemRequest;
 use App\Http\Requests\CartUpdateRequest;
+use App\Order;
 use App\Product;
-use Illuminate\Http\Request;
 use \Cart;
 
 class CartController extends Controller
@@ -26,7 +26,8 @@ class CartController extends Controller
     {
         $product = Product::findOrfail($productId);
 
-        Cart::add($product->id, $product->title, 1, $product->price);
+        $cartRow = Cart::add($product->id, $product->title, 1, $product->price);
+        $cartRow->associate(Product::class);
 
         return redirect()->back();
     }
@@ -69,5 +70,16 @@ class CartController extends Controller
     public function checkout()
     {
         return view('orders.checkout');
+    }
+
+    /**
+     * @param $orderId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function success($orderId)
+    {
+        $order = Order::findOrFail($orderId);
+
+        return view('cart.success', compact('order'));
     }
 }
