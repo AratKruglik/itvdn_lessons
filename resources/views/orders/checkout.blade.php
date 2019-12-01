@@ -15,7 +15,7 @@
                 <!--Card-->
                 <div class="card">
                     <!--Card content-->
-                    <form class="card-body" action="{{ route('order.create') }}" method="post">
+                    <form class="card-body" action="{{ route('order.store') }}" method="post">
                     {{ csrf_field() }}
 
                     <!--Grid row-->
@@ -26,7 +26,7 @@
                                 <div class="form-group">
                                     <label for="firstName" class="">First name</label>
                                     <input type="text" id="firstName" class="form-control" name="customerName"
-                                           value="{{ auth()->user()->name }}">
+                                           value="{{ auth()->user()->name ?? null }}">
                                 </div>
                             </div>
                             <!--Grid column-->
@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <label for="lastName" class="">Last name</label>
                                     <input type="text" id="lastName" class="form-control" name="customerLastName"
-                                           value="{{ auth()->user()->lastname }}">
+                                           value="{{ auth()->user()->lastname ?? null }}">
                                 </div>
 
                             </div>
@@ -50,21 +50,21 @@
                         <div class="form-group mb-5">
                             <label for="email" class="">Email</label>
                             <input type="text" id="email" class="form-control" placeholder="youremail@example.com"
-                                   name="customerEmail" value="{{ auth()->user()->email }}" required>
+                                   name="customerEmail" value="{{ auth()->user()->email ?? null }}" required>
                         </div>
 
                         <!--address-->
                         <div class="form-group mb-5">
                             <label for="phone" class="">Phone number</label>
                             <input type="text" id="phone" class="form-control" placeholder="+1 (123) 456-7890"
-                                   name="customerPhone" value="{{ auth()->user()->phone }}">
+                                   name="customerPhone" value="{{ auth()->user()->phone ?? null }}">
                         </div>
 
                         <div class="form-group mb-5">
                             <label for="address" class="">Address</label>
                             <input type="text" id="address" class="form-control"
                                    placeholder="Park av., 123, New York, USA"
-                                   name="customerAddress" value="{{ auth()->user()->address }}">
+                                   name="customerAddress" value="{{ auth()->user()->address ?? null }}">
                         </div>
 
                         <div class="form-group mb-5">
@@ -76,12 +76,15 @@
 
                         <hr class="mb-4">
 
+                        @guest
+                        @else
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="save-info" name="updateUser">
                             <label class="custom-control-label" for="save-info">Save this information for next
                                 time</label>
                         </div>
                         <hr class="mb-4">
+                        @endif
                         <button class="btn btn-primary btn-lg btn-block" type="submit">Order it</button>
 
                     </form>
