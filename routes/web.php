@@ -27,3 +27,5 @@ Route::prefix('cart')->group(function () {
     Route::get('destroy', 'CartController@destroy')->name('cart.destroy');
     Route::get('checkout', 'CartController@checkout')->name('cart.checkout');
 });
+
+Route::resource('order', 'OrderController');

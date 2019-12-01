@@ -15,7 +15,7 @@
                 <!--Card-->
                 <div class="card">
                     <!--Card content-->
-                    <form class="card-body" action="{{ route('order.store') }}" method="post">
+                    <form class="card-body" action="{{ route('order.create') }}" method="post">
                     {{ csrf_field() }}
 
                     <!--Grid row-->
