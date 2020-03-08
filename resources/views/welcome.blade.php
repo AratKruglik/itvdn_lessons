@@ -114,7 +114,7 @@ Welcome!
             <!--Grid row-->
             <div class="row wow fadeIn">
                 @foreach($products as $product)
-                    @include('catalog.card', compact('$product'))
+                    @include('catalog.card', compact('product'))
                 @endforeach
             </div>
             <!--Grid row-->

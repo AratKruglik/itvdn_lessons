@@ -1,5 +1,7 @@
 <?php
 
+use App\Gallery;
+use App\Product;
 use Illuminate\Database\Seeder;
 
 class GalleryTableSeeder extends Seeder
@@ -11,8 +13,8 @@ class GalleryTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Product::all()->each(function ($product) {
-            $gallery = factory(\App\Gallery::class)->create();
+        Product::all()->each(function ($product) {
+            $gallery = factory(Gallery::class)->create();
             $product->gallery()->save($gallery);
         });
     }
