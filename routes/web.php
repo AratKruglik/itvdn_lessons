@@ -30,3 +30,8 @@ Route::prefix('cart')->group(function () {
 });
 
 Route::resource('order', 'OrderController', ['only' => ['store', 'update', 'destroy', 'show']]);
+
+// Admin
+Route::get('admin-panel', function () {
+    return view('admin.layout');
+});
