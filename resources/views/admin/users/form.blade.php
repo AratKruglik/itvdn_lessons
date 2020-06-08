@@ -1,3 +1,7 @@
+{{ \Form::open(['url' => '/', 'method' => 'put']) }}
+{{ \Form::token() }}
+{{ \Form::close() }}
+
 <form role="form">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
