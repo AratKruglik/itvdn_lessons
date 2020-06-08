@@ -36,8 +36,8 @@
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="/edit/{{ $user->getKey() }}" class="btn btn-warning">Edit</a>
-                                    <a href="#" class="btn btn-danger">Delete</a>
+                                    <a href="{{ route('admin.users.edit', ['user' => $user->getKey()]) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('admin.users.delete', ['user' => $user->getKey()]) }}" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>
                         </tr>

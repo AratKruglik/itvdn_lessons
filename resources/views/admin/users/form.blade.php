@@ -1,24 +1,57 @@
-{{ \Form::open(['url' => '/', 'method' => 'put']) }}
-{{ \Form::token() }}
-{{ \Form::close() }}
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@yield('title')</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            @if($errors->count() > 0)
+                <p>The following errors have occurred:</p>
+                <ul>
+                    @foreach($errors->all() as $message)
+                        <li>{{$message}}</li>
+                    @endforeach
+                </ul>
+            @endif
 
-<form role="form">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+            {{ Form::model($user, ['route' => ['admin.users.update', $user->getKey()], 'method' => 'put']) }}
+            <div class="form-group">
+                {{ Form::label('name', 'Name') }}
+                {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) }}
+            </div>
+            <div class="form-group">
+                {{ Form::label('lastname', 'Last Name') }}
+                {{ Form::text('lastname', null, ['class' => 'form-control', 'placeholder' => 'Last Name']) }}
+            </div>
+            <div class="form-group">
+                {{ Form::label('email', 'Email') }}
+                {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Email']) }}
+            </div>
+            <div class="form-group">
+                {{ Form::label('phone', 'Phone') }}
+                {{ Form::text('phone', null, ['class' => 'form-control', 'placeholder' => 'Phone']) }}
+            </div>
+            <div class="form-group">
+                {{ Form::label('address', 'Address') }}
+                {{ Form::text('address', null, ['class' => 'form-control', 'placeholder' => 'Address']) }}
+            </div>
+            @if(auth()->user()->is_admin)
+                <div class="form-group">
+                    {{ Form::label('is_admin', 'Admin') }}
+                    {{ Form::checkbox('is_admin', $user->is_admin, $user->is_admin) }}
+                </div>
+                <div class="form-group">
+                    {{ Form::label('is_manager', 'Manager') }}
+                    {{ Form::checkbox('is_manager', $user->is_manager, $user->is_manager) }}
+                </div>
+            @endif
+        <!-- /.card-body -->
+            <div class="card-footer">
+                {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+            </div>
+            {{ Form::close() }}
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
+        <!-- /.card-body -->
     </div>
-    <!-- /.card-body -->
-
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
+    <!-- /.card -->
+</div>
