@@ -37,7 +37,7 @@
                             <td>
                                 <div class="btn-group">
                                     <a href="/edit/{{ $user->getKey() }}" class="btn btn-warning">Edit</a>
-                                    <button class="btn btn-danger">Delete</button>
+                                    <a href="#" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>
                         </tr>
