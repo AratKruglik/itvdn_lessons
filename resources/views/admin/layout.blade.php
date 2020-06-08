@@ -7,13 +7,13 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="admin/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="admin/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/admin/dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -23,7 +23,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="../../index3.html" class="brand-link">
+        <a href="#" class="brand-link">
             <img src="admin/dist/img/AdminLTELogo.png"
                  alt="AdminLTE Logo"
                  class="brand-image img-circle elevation-3"
@@ -39,7 +39,7 @@
                     <img src="admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
+                    <a href="#" class="d-block">Test User</a>
                 </div>
             </div>
 
@@ -61,7 +61,9 @@
         <!-- /.sidebar -->
     </aside>
 
-    @include('admin.content')
+    <div class="content-wrapper">
+        @yield('content')
+    </div>
 
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
@@ -80,14 +82,14 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="admin/plugins/jquery/jquery.min.js"></script>
+<script src="/admin/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
-<script src="admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="admin/dist/js/adminlte.min.js"></script>
+<script src="/admin/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="admin/dist/js/demo.js"></script>
+<script src="/admin/dist/js/demo.js"></script>
 </body>
 </html>
