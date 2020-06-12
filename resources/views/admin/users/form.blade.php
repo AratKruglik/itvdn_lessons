@@ -38,11 +38,11 @@
             @if(auth()->user()->is_admin)
                 <div class="form-group">
                     {{ Form::label('is_admin', 'Admin') }}
-                    {{ Form::checkbox('is_admin', $user->is_admin, $user->is_admin) }}
+                    {{ Form::checkbox('is_admin', true, $user->is_admin) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('is_manager', 'Manager') }}
-                    {{ Form::checkbox('is_manager', $user->is_manager, $user->is_manager) }}
+                    {{ Form::checkbox('is_manager', true, $user->is_manager) }}
                 </div>
             @endif
         <!-- /.card-body -->

@@ -210,7 +210,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
-
+        'Form' => Collective\Html\FormFacade::class,
     ],
 
 ];

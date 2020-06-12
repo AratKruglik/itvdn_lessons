@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'lastName' => $faker->lastName,
             'email' => 'admin@laravel-shop.test',
             'password' => Hash::make('secret'),
+            'is_admin' => true,
         ]);
 
         for ($i = 0; $i < 5; $i++) {

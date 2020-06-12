@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ece0bfa657b6022cade90f8620a57f1a",
+    "content-hash": "618db8bcd6799b7ce3c45beb7e81eaa3",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1128,16 +1128,16 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "v5.7.1",
+            "version": "v5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "777b6d390811ba249255ed5750bf17a019cd88a5"
+                "reference": "68caec9e820453e9835cc11a83969188f770467f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/777b6d390811ba249255ed5750bf17a019cd88a5",
-                "reference": "777b6d390811ba249255ed5750bf17a019cd88a5",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/68caec9e820453e9835cc11a83969188f770467f",
+                "reference": "68caec9e820453e9835cc11a83969188f770467f",
                 "shasum": ""
             },
             "require": {
@@ -1151,7 +1151,7 @@
             "require-dev": {
                 "illuminate/database": "5.7.*",
                 "mockery/mockery": "~1.0",
-                "phpunit/phpunit": "~7.1"
+                "phpunit/phpunit": "~5.4"
             },
             "type": "library",
             "extra": {
@@ -1192,7 +1192,7 @@
             ],
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "https://laravelcollective.com",
-            "time": "2018-09-05T18:32:53+00:00"
+            "time": "2018-09-05T18:08:07+00:00"
         },
         {
             "name": "lcobucci/jwt",
