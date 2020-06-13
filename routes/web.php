@@ -24,7 +24,7 @@ Route::prefix('cart')->group(function () {
 Route::resource('order', 'OrderController', ['only' => ['store', 'update', 'destroy', 'show']]);
 
 // Admin Panel
-Route::group(['prefix' => 'admin-panel', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin-panel', 'middleware' => ['auth', 'admin-panel']], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     // Users
