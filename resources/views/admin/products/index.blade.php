@@ -9,7 +9,9 @@
                 <h3 class="card-title">@yield('title')</h3>
                 <div class="card-tools">
                     {{ $products->links() }}
-                    <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Create</a>
+                    <div class="mt-2">
+                        <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Create</a>
+                    </div>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -28,6 +30,7 @@
                     </thead>
                     <tbody>
                         @foreach($products as $product)
+                            @if(!$product->trashed())
                             <tr>
                                 <td>{{ $product->getKey() }}</td>
                                 <td>{{ $product->title }}</td>
@@ -35,36 +38,31 @@
                                     @foreach($product->categories as $category)
                                             <span class="badge
                                              @if ($category->id == 1)
-                                                    purple
+                                                    bg-teal
                                              @elseif($category->id == 2)
-                                                    blue
+                                                    bg-purple
                                             @elseif($category->id == 3)
-                                                    red
+                                                    bg-maroon
                                             @elseif($category->id == 4)
-                                                    yellow
+                                                    bg-navy
                                             @elseif($category->id == 5)
-                                                    lime
+                                                    bg-success
                                             @endif
                                                     mr-1">{{ $category->name }}
                                             </span>
                                     @endforeach
                                 </td>
-                                <td>{{ $product->price }}</td>
+                                <td>${{ $product->price }}</td>
                                 <td>{{ $product->barcode }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="/edit/{{ $product->getKey() }}" class="btn btn-warning">Edit</a>
-                                        <a href="#" class="btn btn-danger">Delete</a>
-                                        @if(auth()->user()->is_admin)
-                                            @if($product->trashed())
-                                                <a href="#" class="btn btn-warning">Restore</a>
-                                            @else
-                                                <a href="#" class="btn btn-danger">DROP</a>
-                                        @endif
+                                        <a href="{{ route('admin.products.edit', ['product' => $product->getKey()]) }}" class="btn btn-warning">Edit</a>
+                                        <a href="{{ route('admin.products.delete', ['product' => $product->getKey()]) }}" class="btn btn-danger">Delete</a>
                                     </div>
                                 </td>
                             </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -73,4 +71,47 @@
         </div>
         <!-- /.card -->
     </div>
+
+    @if(count($trashedProducts) > 0)
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">@yield('title') | Trashed</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Barcode</th>
+                                <th>Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($trashedProducts as $trashedProduct)
+                                <tr>
+                                    <td>{{ $trashedProduct->getKey() }}</td>
+                                    <td>{{ $trashedProduct->title }}</td>
+                                    <td>{{ $trashedProduct->barcode }}</td>
+                                    <td>{{ $trashedProduct->stock }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            @if(auth()->user()->is_admin)
+                                                <a href="{{ route('admin.products.restore', ['product' => $trashedProduct->getKey()]) }}" class="btn btn-warning">Restore</a>
+                                                <a href="{{ route('admin.products.destroy', ['product' => $trashedProduct->getKey()]) }}" class="btn btn-danger">DROP</a>
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>destroy
+            <!-- /.card -->
+        </div>
+    @endif
 @endsection

@@ -40,9 +40,9 @@ Route::group(['prefix' => 'admin-panel', 'middleware' => ['auth']], function () 
         Route::get('/', 'ProductController@index')->name('admin.products.index');
         Route::get('create', 'ProductController@create')->name('admin.products.create');
         Route::post('create', 'ProductController@store')->name('admin.products.store');
-        Route::get('edit/{id}', 'ProductController@edit')->name('admin.products.edit');
-        Route::put('edit/{id}', 'ProductController@update')->name('admin.products.update');
-        Route::get('delete/{id}', 'ProductController@delete')->name('admin.products.delete');
+        Route::get('edit/{product}', 'ProductController@edit')->name('admin.products.edit');
+        Route::put('edit/{product}', 'ProductController@update')->name('admin.products.update');
+        Route::get('delete/{product}', 'ProductController@delete')->name('admin.products.delete');
         Route::get('drop/{id}', 'ProductController@destroy')->name('admin.products.destroy');
         Route::get('restore/{id}', 'ProductController@restore')->name('admin.products.restore');
     });
@@ -50,7 +50,7 @@ Route::group(['prefix' => 'admin-panel', 'middleware' => ['auth']], function () 
     // Orders
     Route::prefix('orders')->group(function () {
         Route::get('/', 'OrderController@index')->name('admin.orders.index');
-        Route::get('show/{id}', 'OrdersCOntroller@show')->name('admin.orders.show');
+        Route::get('show/{id}', 'OrdersController@show')->name('admin.orders.show');
         Route::get('delete/{id}', 'OrderController@delete')->name('admin.orders.delete');
     });
 });
