@@ -123,7 +123,7 @@ class ProductController extends Controller
     public function destroy(int $id)
     {
         $product = Product::onlyTrashed()->whereId($id)->first();
-        $this->authorize('destroy', $product);
+        $this->authorize('forceDelete', $product);
         $product->forceDelete();
 
         return redirect()->route('admin.products.index');

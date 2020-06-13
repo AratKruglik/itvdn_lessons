@@ -91,6 +91,7 @@
                         </thead>
                         <tbody>
                             @foreach($trashedProducts as $trashedProduct)
+                                @canany(['can-destroy', 'can-restore'], $trashedProduct)
                                 <tr>
                                     <td>{{ $trashedProduct->getKey() }}</td>
                                     <td>{{ $trashedProduct->title }}</td>
@@ -98,13 +99,12 @@
                                     <td>{{ $trashedProduct->stock }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            @if(auth()->user()->is_admin)
-                                                <a href="{{ route('admin.products.restore', ['product' => $trashedProduct->getKey()]) }}" class="btn btn-warning">Restore</a>
-                                                <a href="{{ route('admin.products.destroy', ['product' => $trashedProduct->getKey()]) }}" class="btn btn-danger">DROP</a>
-                                            @endif
+                                            <a href="{{ route('admin.products.restore', ['product' => $trashedProduct->getKey()]) }}" class="btn btn-warning">Restore</a>
+                                            <a href="{{ route('admin.products.destroy', ['product' => $trashedProduct->getKey()]) }}" class="btn btn-danger">DROP</a>
                                         </div>
                                     </td>
                                 </tr>
+                                @endcanany
                             @endforeach
                         </tbody>
                     </table>
