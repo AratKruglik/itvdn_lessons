@@ -12,10 +12,10 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\User  $user
+     * @param  User  $user
      * @return mixed
      */
-    public function update(User $user)
+    public function update(User $user): bool
     {
         return $user->is_admin || $user->is_manager;
     }
@@ -23,10 +23,10 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\User  $user
+     * @param  User  $user
      * @return mixed
      */
-    public function delete(User $user)
+    public function delete(User $user): bool
     {
         return $user->is_admin || $user->is_manager;
     }

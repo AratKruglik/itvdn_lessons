@@ -10,10 +10,10 @@ class ProductObserver
     /**
      * Handle the product "creating" event.
      *
-     * @param  \App\Product  $product
+     * @param  Product  $product
      * @return void
      */
-    public function creating(Product $product)
+    public function creating(Product $product): void
     {
         $product->slug = Str::slug($product->title);
     }
@@ -21,10 +21,10 @@ class ProductObserver
     /**
      * Handle the product "creating" event.
      *
-     * @param  \App\Product  $product
+     * @param  Product  $product
      * @return void
      */
-    public function updating(Product $product)
+    public function updating(Product $product): void
     {
         $product->slug = Str::slug($product->title);
     }

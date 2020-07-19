@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Product;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class PageController extends Controller
 {
-    public function index()
+    /**
+     * @return View
+     */
+    public function __invoke(): View
     {
         $products = Product::orderBy('created_at', 'desc')->take(12)->get();
 

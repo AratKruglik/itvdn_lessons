@@ -5,78 +5,91 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CartDropItemRequest;
 use App\Http\Requests\CartUpdateRequest;
 use App\Order;
-use App\Product;
+use App\Services\CartService;
 use \Cart;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class CartController extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @var CartService
      */
-    public function index()
+    private $cartService;
+
+    /**
+     * CartController constructor.
+     * @param CartService $cartService
+     */
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
+    /**
+     * @return View
+     */
+    public function index(): View
     {
         return view('cart.index');
     }
 
     /**
      * @param $productId
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function add($productId)
+    public function add($productId): RedirectResponse
     {
-        $product = Product::findOrfail($productId);
-
-        $cartRow = Cart::add($product->id, $product->title, 1, $product->price);
-        $cartRow->associate(Product::class);
+       $this->cartService->addProduct($productId);
 
         return redirect()->back();
     }
 
     /**
      * @param CartUpdateRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(CartUpdateRequest $request)
+    public function update(CartUpdateRequest $request): RedirectResponse
     {
-        Cart::update($request->productId, $request->qty);
+        $this->cartService->updateCart($request);
 
         return redirect()->route('cart.index');
     }
 
     /**
      * @param CartDropItemRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function drop(CartDropItemRequest $request)
+    public function drop(CartDropItemRequest $request): RedirectResponse
     {
-        Cart::remove($request->productId);
+        $this->cartService->updateCart($request);
 
         return redirect()->route('cart.index');
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function destroy()
+    public function destroy(): RedirectResponse
     {
-        Cart::destroy();
+        $this->cartService->destroyCart();
 
         return redirect()->route('cart.index');
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      */
-    public function checkout()
+    public function checkout(): View
     {
         return view('orders.checkout');
     }
 
     /**
      * @param $orderId
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      */
-    public function success($orderId)
+    public function success($orderId): View
     {
         $order = Order::findOrFail($orderId);
 

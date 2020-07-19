@@ -5,16 +5,33 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\ProductFormRequest;
 use App\Product;
-use Illuminate\Http\Request;
+use App\Services\ProductService;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
     /**
+     * @var ProductService
+     */
+    private $productService;
+
+    /**
+     * ProductController constructor.
+     * @param ProductService $productService
+     */
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $products = Product::with(['categories'])->paginate();
         $trashedProducts = Product::onlyTrashed()->get();
@@ -25,9 +42,9 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $categories = Category::all();
         $categories = $categories->pluck('name', 'id');
@@ -40,15 +57,11 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  ProductFormRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function store(ProductFormRequest $request)
+    public function store(ProductFormRequest $request): RedirectResponse
     {
-        $product = Product::create($request->all());
-
-        foreach ($request->categories as $categoryId) {
-            $product->categories()->attach($categoryId);
-        }
+        $this->productService->storeProduct($request);
 
         return redirect()->route('admin.products.index');
     }
@@ -56,10 +69,10 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param  Product  $product
+     * @return View
      */
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         $categories = Category::all();
         $categories = $categories->pluck('name', 'id');
@@ -72,16 +85,12 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  ProductFormRequest  $request
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param  Product  $product
+     * @return RedirectResponse
      */
-    public function update(ProductFormRequest $request, Product $product)
+    public function update(ProductFormRequest $request, Product $product): RedirectResponse
     {
-        $product->update($request->all());
-
-        foreach ($request->categories as $categoryId) {
-            $product->categories()->sync($categoryId);
-        }
+        $this->productService->updateProduct($request, $product);
 
         return redirect()->route('admin.products.index');
     }
@@ -89,12 +98,12 @@ class ProductController extends Controller
     /**
      * Delete the specified resource from storage.
      *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param  Product  $product
+     * @return RedirectResponse
      */
-    public function delete(Product $product)
+    public function delete(Product $product): RedirectResponse
     {
-        $product->delete();
+        $this->productService->deleteProduct($product);
 
         return redirect()->route('admin.products.index');
     }
@@ -102,14 +111,16 @@ class ProductController extends Controller
     /**
      * Restore the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function restore(int $id)
+    public function restore(int $id): RedirectResponse
     {
         $product = Product::onlyTrashed()->whereId($id)->first();
         $this->authorize('restore', $product);
-        $product->restore();
+
+        $this->productService->restoreProduct($product);
 
         return redirect()->route('admin.products.index');
     }
@@ -117,14 +128,16 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function destroy(int $id)
+    public function destroy(int $id): RedirectResponse
     {
         $product = Product::onlyTrashed()->whereId($id)->first();
         $this->authorize('forceDelete', $product);
-        $product->forceDelete();
+
+        $this->productService->destroyProduct($product);
 
         return redirect()->route('admin.products.index');
     }

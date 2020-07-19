@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'PageController@index')->name('index');
+Route::get('/', PageController::class)->name('index');
 
 Route::resource('catalog', 'CatalogController')->parameters([
     'catalog' => 'slug'
@@ -25,7 +27,7 @@ Route::resource('order', 'OrderController', ['only' => ['store', 'update', 'dest
 
 // Admin Panel
 Route::group(['prefix' => 'admin-panel', 'middleware' => ['auth', 'admin-panel']], function () {
-    Route::get('/', 'AdminController@index')->name('admin.index');
+    Route::get('/', AdminController::class)->name('admin.index');
 
     // Users
     Route::prefix('users')->group(function () {

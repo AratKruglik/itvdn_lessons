@@ -13,11 +13,11 @@ class ProductPolicy
     /**
      * Determine whether the user can restore the product.
      *
-     * @param  \App\User  $user
-     * @param  \App\Product  $product
+     * @param  User  $user
+     * @param  Product  $product
      * @return mixed
      */
-    public function restore(User $user, Product $product)
+    public function restore(User $user, Product $product): bool
     {
         return $user->is_admin;
     }
@@ -25,11 +25,11 @@ class ProductPolicy
     /**
      * Determine whether the user can permanently delete the product.
      *
-     * @param  \App\User  $user
-     * @param  \App\Product  $product
+     * @param  User  $user
+     * @param  Product  $product
      * @return mixed
      */
-    public function forceDelete(User $user, Product $product)
+    public function forceDelete(User $user, Product $product): bool
     {
         return $user->is_admin;
     }

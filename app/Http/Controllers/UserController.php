@@ -3,42 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EditUserRequest;
+use App\Services\UserService;
 use App\User;
-use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function index()
+    /**
+     * @var UserService
+     */
+    private $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+    /**
+     * @return View
+     */
+    public function index(): View
     {
         $users = User::paginate();
         
         return view('admin.users.index', compact('users'));
     }
 
-    public function edit(User $user)
+    /**
+     * @param User $user
+     * @return View
+     */
+    public function edit(User $user): View
     {
         return view('admin.users.edit', compact('user'));
     }
 
-    public function update(EditUserRequest $request, User $user)
+    /**
+     * @param EditUserRequest $request
+     * @param User $user
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function update(EditUserRequest $request, User $user): RedirectResponse
     {
         $this->authorize('update', $user);
 
-        $user->update([
-            'name' => $request->name,
-            'lastname' => $request->lastname,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'is_admin' => $request->has('is_admin') ? $request->is_admin : false,
-            'is_manager' => $request->has('is_manager') ? $request->is_manager : false,
-        ]);
+        $this->userService->updateUser($request, $user);
 
         return redirect()->route('admin.users.index');
     }
 
-    public function delete(User $user)
+    /**
+     * @param User $user
+     * @return RedirectResponse
+     * @throws Exception
+     */
+    public function delete(User $user): RedirectResponse
     {
-        $user->delete();
+       $this->userService->deleteUser($user);
 
         return redirect()->route('admin.users.index');
     }
